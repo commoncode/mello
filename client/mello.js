@@ -40,6 +40,10 @@ Template.taskList.events({
 Template.task.helpers({
   editing: function() { 
     return Session.equals('editing-task-id', this._id); 
+  },
+  username: function() {
+    var owner = Meteor.users.findOne(this.userId);
+    return owner && owner.username;
   }
 });
 
@@ -62,6 +66,19 @@ Template.taskForm.helpers({
   },
   listCheckedAttr: function() {
     return this.selected && 'checked';
+  },
+  noUserSelected: function() {
+    return !this.userId;
+  },
+  users: function() {
+    var task = this;
+    return Meteor.users.find().map(function(user) {
+      user.selected = (user._id === task.userId) 
+      return user;
+    });
+  },
+  userSelectedAttr: function() {
+    return this.selected && 'selected';
   }
 });
 
@@ -74,6 +91,9 @@ Template.taskForm.events({
   },
   'change [name=listId]': function(event, template) {
     Tasks.update({_id: template.data._id}, {$set: {listId: this._id}});
+  },
+  'change .userSelector': function(event, template) {
+    Tasks.update(template.data._id, {$set: {userId: $(event.target).val()}});
   },
   'click .delete': function(event) {
     event.preventDefault();

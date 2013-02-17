@@ -65,6 +65,9 @@
       
       <h4>{{title}}</h4>
       {{#if description}}<p class="description">{{description}}</p>{{/if}}
+      {{#if username}}
+        <p class="assigned"><em>assigned to: {{username}}</em></p>
+      {{/if}}
     {{/if}}
   </li>
 </template>
@@ -82,6 +85,21 @@
           {{type}}
         </label>
       {{/each}}
+    </div>
+    
+    <div class="listAssignment">
+      <select class="userSelector">
+        <option value="">
+          {{#if noUserSelected}}
+            Assign to User ...
+          {{else}}
+            Unassign
+          {{/if}}
+        </option>
+        {{#each users}}
+          <option {{userSelectedAttr}} value="{{_id}}">{{username}}</option>
+        {{/each}}
+      </select>
     </div>
     
     <button class="delete">Delete</button>
