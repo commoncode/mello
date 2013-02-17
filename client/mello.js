@@ -10,6 +10,14 @@ Template.taskList.helpers({
   }
 });
 
+Template.taskList.events({
+  'click .addTask': function() {
+    // insert a task and set it to edit mode
+    var newTaskId = Tasks.insert({listId: this._id, title: 'New Task'});
+    Session.set('editing-task-id', newTaskId);
+  }
+});
+
 Template.task.helpers({
   editing: function() { 
     return Session.equals('editing-task-id', this._id); 
@@ -47,5 +55,9 @@ Template.taskForm.events({
   },
   'change [name=listId]': function(event, template) {
     Tasks.update({_id: template.data._id}, {$set: {listId: this._id}});
+  },
+  'click .delete': function(event) {
+    event.preventDefault();
+    Tasks.remove(this._id);
   }
 });
