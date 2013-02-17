@@ -11,6 +11,21 @@ Template.taskList.helpers({
 });
 
 Template.task.helpers({
+  editing: function() { 
+    return Session.equals('editing-task', this._id); 
+  }
+});
+
+Template.task.events({
+  'click .edit': function() {
+    Session.set('editing-task', this._id); 
+  },
+  'click .done': function() {
+    Session.set('editing-task', null); 
+  }
+})
+
+Template.taskForm.helpers({
   lists: function() {
     var task = this;
     return Lists.find().map(function(list) {
@@ -23,7 +38,7 @@ Template.task.helpers({
   }
 });
 
-Template.task.events({
+Template.taskForm.events({
   'change [name=listId]': function(event, template) {
     Tasks.update({_id: template.data._id}, {$set: {listId: this._id}});
   }

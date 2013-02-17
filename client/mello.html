@@ -45,16 +45,25 @@
     <h4>{{title}}</h4>
     {{#if description}}<p class="description">{{description}}</p>{{/if}}
     
-    <form name="task" class="taskDetails">
-      <div class="listSelector">
-        {{#each lists}}
-          <label>
-            <input name="listId" type="radio" value="{{_id}}" 
-              {{listCheckedAttr}} />
-            {{type}}
-          </label>
-        {{/each}}
-      </div>
-    </form>
+    {{#if editing}}
+      {{> taskForm}}
+      <button class="done">done</button>
+    {{else}}
+      <button class="edit">edit</button>
+    {{/if}}
   </li>
+</template>
+
+<template name="taskForm">
+  <form name="task" class="taskDetails">
+    <div class="listSelector">
+      {{#each lists}}
+        <label>
+          <input name="listId" type="radio" value="{{_id}}" 
+            {{listCheckedAttr}} />
+          {{type}}
+        </label>
+      {{/each}}
+    </div>
+  </form>
 </template>
