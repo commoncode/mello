@@ -2,6 +2,21 @@ Accounts.ui.config({
   passwordSignupFields: 'USERNAME_ONLY'
 });
 
+Meteor.setInterval(
+  function() {
+    Meteor.call('lastSeen');
+  }, 1000
+)
+
+Template.header.helpers({
+  usersOnline: function() {
+    return Meteor.users.find({
+      'profile.isOnline': true, 
+      _id: {$ne: Meteor.userId()}
+    }).fetch();
+  }
+})
+
 Template.taskLists.helpers({
   lists: function() {
     return Lists.find();

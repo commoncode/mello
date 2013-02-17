@@ -9,7 +9,6 @@ grid_column_width = 3em
 
 @import 'client/dali'
 
-
 //
 //  Page layout
 //
@@ -25,18 +24,35 @@ grid_column_width = 3em
 #header
   grid_column(24)
   panel()
+
   position relative
   z-index 1
 
   h1
     font-size 2em
     float left
+    line-height 0.8em
     margin 0
 
   .login-buttons-dropdown-align-right
     float right
 
-  .taskCounts
+  #usersOnline
+    float right
+    margin-right 1em
+
+    dd, dt
+      float left
+      font-size .75em
+      color #ccc
+
+    dd
+      font-style italic
+
+      .userName:not(:last-child):after
+        content ', '
+
+  #taskCounts
     float right
     margin 0
 

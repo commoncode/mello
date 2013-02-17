@@ -5,18 +5,31 @@
 <body>
   <div id="container">
     <section id="page">
-
-      <section id="header">
-        <header>
-          {{loginButtons align="right"}}
-          <h1>mello</h1>
-        </header>
-      </section>
-      
+      {{> header}}
       {{> taskLists}}
     </section>
   </divs>
 </body>
+
+<template name="header">
+  <section id="header">
+    <header>
+      {{loginButtons align="right"}}
+      <h1>mello</h1>
+      
+      {{#if usersOnline}}
+        <dl id="usersOnline">
+          <dt>online</dt>
+          <dd>
+            {{#each usersOnline}}
+              <span class="userName">{{username}}</span>
+            {{/each}}
+          </dd>
+        </dl>
+      {{/if}}
+    </header>
+  </section>
+</template>
 
 <template name="taskLists">
   <section id="lists">
