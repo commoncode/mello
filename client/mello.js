@@ -14,8 +14,30 @@ Template.header.helpers({
       'profile.isOnline': true, 
       _id: {$ne: Meteor.userId()}
     }).fetch();
+  },
+  allCount: function() {
+    return Tasks.find().count();
+  },
+  myCount: function() {
+    return Tasks.find({userId: Meteor.userId()}).count();
+  },
+  allActiveClass: function() {
+    return !Session.get('showMine') && 'active';
+  },
+  mineActiveClass: function() {
+    return Session.get('showMine') && 'active';
   }
-})
+});
+
+Template.header.events({
+  'click .showMine': function() {
+    Session.set('showMine', true);
+  },
+  'click .showAll': function() {
+    Session.set('showMine', false);
+  }
+});
+
 
 Template.taskLists.helpers({
   lists: function() {
@@ -25,7 +47,10 @@ Template.taskLists.helpers({
 
 Template.taskList.helpers({
   tasks: function() {
-    return Tasks.find({listId: this._id});
+    var filter = {listId: this._id};
+    if (Session.get('showMine', true))
+      filter.userId = Meteor.userId();
+    return Tasks.find(filter);
   }
 });
 

@@ -17,6 +17,17 @@
       {{loginButtons align="right"}}
       <h1>mello</h1>
       
+      {{#if currentUser}}
+        <ul id="taskCounts">
+            <li>
+              <button class="showMine {{mineActiveClass}}">My tasks ({{myCount}})</button>
+            </li>
+            <li>
+              <button class="showAll {{allActiveClass}}">All Tasks ({{allCount}})</button>
+            </li>
+        </ul>
+      {{/if}}
+      
       {{#if usersOnline}}
         <dl id="usersOnline">
           <dt>online</dt>
