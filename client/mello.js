@@ -1,3 +1,7 @@
+Accounts.ui.config({
+  passwordSignupFields: 'USERNAME_ONLY'
+});
+
 Template.taskLists.helpers({
   lists: function() {
     return Lists.find();
