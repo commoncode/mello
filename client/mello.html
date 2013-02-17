@@ -13,45 +13,36 @@
         </header>
       </section>
       
-      
-      <section id="lists">
-        <div id="lists-container">
-          <section class="list">
-            <h2>todo</h2>
-            <ul class="tasks">
-              <li class="task">
-                <h4>Create Collections</h4>
-                <p class="description">Collections are great</p>
-              </li>
-              
-              <li class="task">
-                <h4>Build Functionality</h4>
-              </li>
-            </ul>
-          </section>
-          
-          <section class="list">
-            <h2>doing</h2>
-            <ul class="tasks">
-              <li class="task">
-                <h4>Build HTML</h4>
-                <p class="description">Simple HMTL + Styles</p>
-              </li>
-            </ul>
-          </section>
-
-          <section class="list">
-            <h2>done</h2>
-            <ul class="tasks">
-              <li class="task">
-                <h4>Create Meteor Project</h4>
-              </li>
-            </ul>
-          </section>
-          
-        </div>
-      </section>
-      
+      {{> taskLists}}
     </section>
   </divs>
 </body>
+
+<template name="taskLists">
+  <section id="lists">
+    <div id="lists-container">
+      {{#each lists}}
+        {{> taskList}}
+      {{/each}}
+    </div>
+  </section>
+
+</template>
+
+<template name="taskList">
+  <section class="list">
+    <h2>{{type}}</h2>
+    <ul class="tasks">
+      {{#each tasks}}
+        {{> task}}
+      {{/each}}
+    </ul>
+  </section>
+</template>
+
+<template name="task">
+  <li class="task">
+    <h4>{{title}}</h4>
+    {{#if description}}<p class="description">{{description}}</p>{{/if}}
+  </li>
+</template>
