@@ -1,0 +1,225 @@
+@import 'nib'
+
+//
+// DALI
+//
+// A Style framework in Stylus by Daryl Antony
+//
+// Based on the picks of Zurb, Bootstrap and others with my own Grid flavour.
+//
+
+//
+// Resets
+//
+
+global-reset()
+reset-html5()
+
+//
+// Grid
+//
+
+// These settings should be overridden by the file
+// importing 'dali', like so:
+//
+// grid_columns = 18
+// grid_gutter = 1em
+// grid_column_width = 3em
+
+// @import '.meteor/meteorite/packages/dali/dali'
+
+unless grid_columns is defined
+  grid_columns = 24
+
+unless grid_gutter is defined
+  grid_gutter = 1em
+
+unless grid_column_width is defined
+  grid_column_width = 3em
+
+grid_row_height = grid_column_width
+grid_width = grid_columns * grid_column_width
+
+columns(n)
+  width n * (grid_width / grid_columns)
+
+grid()
+  margin grid_gutter auto
+  width grid_width
+
+grid_element()
+  display inline-block
+  float left
+  margin (grid_gutter/2)
+
+grid_container()
+  // Define a container that contains
+  // grid elements, aligned in a neat grid
+  // Note, the negative margins for 'pulling'
+  // grid elements outwards
+  margin-left -(grid_gutter/2)
+  margin-right -(grid_gutter/2)
+
+grid_column(c)
+  grid_element()
+  width (c - 1) * grid_column_width + (grid_column_width - grid_gutter)
+
+grid_column_container(c)
+  width c*grid_column_width
+  grid_container()
+
+grid_row(r)
+  grid_element()
+  height (r - 1) * grid_row_height - (grid_row_height - grid_gutter)
+
+grid_row_container()
+  margin-top -(grid_gutter/2)
+  margin-bottom -(grid_gutter/2)
+
+grid_cell(r, c)
+  grid_row(r)
+  grid_column(c)
+
+
+//
+// Panels
+//
+
+panel()
+  background-color #f3f3f3
+  box-shadow 0px 0px 5px #ccc
+  box-sizing border-box
+  padding grid_gutter
+  border-radius 3px
+  opacity .9
+
+//
+// Settings
+//
+
+header_color = #444
+
+//
+// Typography
+//
+// referencing https://github.com/zurb/foundation/blob/master/scss/foundation/common/_typography.scss
+//
+
+html
+  font-family "Helvetica Neue" Helvetica Arial sans-serif
+
+h1, h2, h3, h4, h5, h6
+  color header_color
+  font-weight 900
+  margin-bottom 1em
+  margin-top 1em
+  text-rendering optimizeLegibility
+  a
+    color header_color
+    text-decoration none
+  small
+    font-size: 75%
+
+h1
+  font-size 4em
+
+h2
+  font-size 3em
+
+h3
+  font-size 2em
+
+h4, h5, h6
+  font-size 1em
+
+ul
+  margin-left 1em
+
+dt
+  font-weight bold
+  &:after
+    content ':'
+    margin-right 1em
+dd
+  float left
+
+em
+  font-style italic
+
+strong
+  font-weight bold
+
+//
+// Aside
+//
+
+aside
+
+  // font-size .75em
+
+
+//
+// Forms
+//
+
+form_input()
+  background-color #fff
+  border solid 1px #ccc
+  box-sizing border-box
+  padding grid_gutter
+  border-radius 4px
+
+//
+// Status
+//
+
+.error
+  border-color red
+  border-width 2px
+  box-sizing border
+
+//
+// Buttons
+//
+
+button
+  background-color #e5e5e5
+  border-radius 4px
+  border solid 1px #ccc
+  &:hover
+    background-color #e5e5e5 * 50%
+
+button.active
+  background-color #e5e5e5 * 50%
+  border solid 1px #666
+
+button.delete
+  background-color rgb(238, 190, 190)
+  border solid 1px rgb(231, 110, 110)
+  color rgb(163, 37, 37)
+  &:hover
+    background-color rgb(238, 190, 190) * 50%
+
+//
+// Navigation
+//
+
+nav.flat-list
+  font-weight bold
+  ul
+    margin-left none
+    li
+      display inline-block
+      a
+        text-decoration none
+        &:hover
+          text-decoration underline
+      &:after
+        content '|'
+        margin 0 .75em 0 1em
+    li:first-child
+      margin-left none
+    li:last-child
+      &:after
+        content none
+        margin-right none

@@ -1,0 +1,107 @@
+
+//
+// Dali Settings override & import
+//
+
+grid_columns = 24
+grid_gutter = 1em
+grid_column_width = 3em
+
+@import 'client/dali'
+
+
+//
+//  Page layout
+//
+
+#container
+  grid()
+  clearfix()
+
+#page
+  grid_column(24)
+  clearfix()
+
+#header
+  grid_column(24)
+  panel()
+  position relative
+  z-index 1
+
+  h1
+    font-size 2em
+    float left
+    margin 0
+
+  .login-buttons-dropdown-align-right
+    float right
+
+  .taskCounts
+    float right
+    margin 0
+
+    li
+      float left
+      margin 0 1em 0 0
+
+#lists
+  grid_column(24)
+
+
+  #lists-container
+    margin -(grid_gutter/2)
+
+.list
+  grid_column(8)
+  panel()
+
+  h2
+    font-size 1.5em
+    margin 0
+
+.tasks
+  margin 0
+
+  .task
+    background-color #fff
+    box-shadow 0px 0px 3px #ddd
+    box-sizing border-box
+    border-radius 5px
+    padding grid_gutter
+    margin-bottom 1em
+    clearfix()
+
+    h4
+      float left
+      margin-top 0
+      width 15em
+
+    button
+      float right
+
+    .description, .assigned
+      clear left
+
+    .assigned
+      font-size .75em
+      color #ccc
+      margin-top 1em
+
+    .taskDetails
+      float left
+      width 15em
+
+
+      .listSelector
+        margin-bottom 1em
+
+        input, label
+          display inline
+          margin-top 0
+
+        label
+          margin-right 1em
+
+      button.delete
+        float left
+
