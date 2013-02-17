@@ -64,8 +64,15 @@ _Building an application with Meteor – "Mello from the ground up"_
 Watch while we develop
 ----------------------
 
-+ http://simba.local:3000/
-+ https://github.com/commoncode/mello
++ Everybody open their laptop browsers to: http://simba.local:3000/
+
+### To run meteor and see the code
+
+    $ curl https://install.meteor.com | /bin/sh
+    $ git clone git@github.com:commoncode/mello.git
+    $ cd mello
+    $ meteor
+    Running on: http://localhost:3000/
 
 
 Install Meteor
