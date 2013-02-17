@@ -42,20 +42,24 @@
 
 <template name="task">
   <li class="task">
-    <h4>{{title}}</h4>
-    {{#if description}}<p class="description">{{description}}</p>{{/if}}
-    
     {{#if editing}}
-      {{> taskForm}}
       <button class="done">done</button>
+      
+      {{> taskForm}}
     {{else}}
       <button class="edit">edit</button>
+      
+      <h4>{{title}}</h4>
+      {{#if description}}<p class="description">{{description}}</p>{{/if}}
     {{/if}}
   </li>
 </template>
 
 <template name="taskForm">
   <form name="task" class="taskDetails">
+    <input type="text" name="title" value="{{title}}"></input>
+    <textarea name="description">{{description}}</textarea>
+    
     <div class="listSelector">
       {{#each lists}}
         <label>
