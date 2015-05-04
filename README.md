@@ -18,7 +18,7 @@ Python/Django/JS in Melbourne
 @darylantony @commoncode
 
 #### Code Shop
-114 Hoddle Street<br>
+8 Studley Street<br>
 Abbotsford, Melbourne
 
 Free coffee to any Code Shop visitors from CampJS :)
